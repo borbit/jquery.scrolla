@@ -34,17 +34,18 @@ function createScrolla(viewport, options) {
     content.bind('drag', updateScroll);
 
     scroll.bind('drag', function(event, ui) {
-        content.css('top', -Math.floor(ui.position.top / viewStep) * contStep);
+        content.css('top', viewOffset - Math.floor(ui.position.top / viewStep) * contStep);
     });
 
-    var viewHeight = 0,
-        contHeight = 0,
-        viewStep = 0,
-        contStep = 0;
+    var viewHeight, contHeight,
+        viewOffset, contOffset,
+        viewStep, contStep;
 
     function updateVars() {
         viewHeight = viewport.height();
         contHeight = content.height();
+        viewOffset = viewport.offset().top;
+        contOffset = content.offset().top;
         viewStep = Math.floor(viewHeight / 100);
         contStep = Math.floor(contHeight / 100);
     }
@@ -53,8 +54,7 @@ function createScrolla(viewport, options) {
         updateVars();
 
         if (contHeight > viewHeight) {
-            var offset = content.offset().top - viewport.offset().top;
-            scroll.css('top', Math.abs(offset / contStep) + '%');
+            scroll.css('top', Math.abs((contOffset - viewOffset) / contStep) + '%');
             scroll.css('height', Math.floor(viewHeight / contStep) + '%');
             scroll.show();
         } else {

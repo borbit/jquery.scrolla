@@ -122,13 +122,11 @@ TestCase("behavior", {
     },
 
     testContentPositionIsChangedWhenScrollIsDragged_1: function() {
-        var element = $('<div></div>').css('position', 'relative').appendTo(document.body);
+        var element = $('<div></div>').css('position', 'absolute').appendTo(document.body);
         var content = $('<div></div>').css('position', 'absolute').appendTo(element);
 
-        content.css({
-            'position': 'absolute',
-            'top': '0px'
-        });
+        element.css({'top': '0px'});
+        content.css({'top': '0px'});
 
         element.height(100);
         content.height(400);
@@ -145,13 +143,11 @@ TestCase("behavior", {
     },
 
     testContentPositionIsChangedWhenScrollIsDragged_2: function() {
-        var element = $('<div></div>').css('position', 'relative').appendTo(document.body);
+        var element = $('<div></div>').css('position', 'absolute').appendTo(document.body);
         var content = $('<div></div>').css('position', 'absolute').appendTo(element);
 
-        content.css({
-            'position': 'absolute',
-            'top': '0px'
-        });
+        element.css({'top': '0px'});
+        content.css({'top': '0px'});
 
         element.height(100);
         content.height(400);
@@ -165,6 +161,30 @@ TestCase("behavior", {
         scroll.trigger('dragstop', {position: {top: 75}});
 
         assertEquals(-300, content.position().top);
+    },
+
+    testContentPositionIsChangedWhenScrollIsDragged_3: function() {
+        var element = $('<div></div>').css('position', 'relative').appendTo(document.body);
+        var binder = $('<div></div>').css('position', 'absolute').appendTo(element);
+        var content = $('<div></div>').css('position', 'absolute').appendTo(binder);
+
+        binder.css('top', '-300px');
+        content.css('top', '300px');
+        element.css('margin', '200px')
+
+        element.height(100);
+        binder.height(700);
+        content.height(400);
+
+        element.scrolla({content: content});
+
+        var scroll = element.scrolla('scroll');
+
+        scroll.trigger('dragstart', {position: {top: 0}});
+        scroll.trigger('drag', {position: {top: 75}});
+        scroll.trigger('dragstop', {position: {top: 75}});
+
+        assertEquals(-100, content.position().top);
     },
 
     testScrollPositionIsChangedWhenContentIsDragged_1: function() {

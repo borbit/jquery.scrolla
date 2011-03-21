@@ -14,15 +14,7 @@ TestCase("behavior", {
         assertEquals(1, element.children(scrollClass).length);
     },
 
-    testScrollHasPositionPropertySetToAbsolute: function() {
-        var content = $('<div></div>');
-        var element = $('<div></div>').scrolla({content: content});
-        var scroll = element.scrolla('scroll');
-
-        assertEquals('absolute', scroll.css('position'));
-    },
-
-    testScrollHasCorrectHeightIfContentIsBigger_1: function() {
+    testScrollHasCorrectHeight_1: function() {
         var element = $('<div></div>');
         var content = $('<div></div>');
 
@@ -36,9 +28,9 @@ TestCase("behavior", {
         assertEquals('50%', scroll.css('height'));
     },
 
-    testScrollHasCorrectHeightIfContentIsBigger_2: function() {
-        var element = $('<div></div>');
-        var content = $('<div></div>');
+    testScrollHasCorrectHeight_2: function() {
+        var element = $('<div></div>').css('position', 'relative');
+        var content = $('<div></div>').css('position', 'absolute');
 
         element.height(100);
         content.height(400);
@@ -51,15 +43,13 @@ TestCase("behavior", {
     },
 
     testScrollHasCorrectPosition_1: function() {
-        var element = $('<div></div>');
-        var content = $('<div></div>').css('position', 'absolute');
+        var element = $('<div></div>').css('position', 'relative').appendTo(document.body);
+        var content = $('<div></div>').css('position', 'absolute').appendTo(element);
 
         element.height(100);
         content.height(400);
-        content.appendTo(element);
         content.css('top', '-200px');
 
-        element.appendTo(document.body);
         element.scrolla({content: content});
 
         var scroll = element.scrolla('scroll');
@@ -68,15 +58,13 @@ TestCase("behavior", {
     },
 
     testScrollHasCorrectPosition_2: function() {
-        var element = $('<div></div>');
-        var content = $('<div></div>').css('position', 'absolute');
+        var element = $('<div></div>').css('position', 'relative').appendTo(document.body);
+        var content = $('<div></div>').css('position', 'absolute').appendTo(element);
 
         element.height(100);
         content.height(400);
-        content.appendTo(element);
         content.css('top', '-100px');
 
-        element.appendTo(document.body);
         element.scrolla({content: content});
 
         var scroll = element.scrolla('scroll');
@@ -85,15 +73,13 @@ TestCase("behavior", {
     },
 
     testScrollHasCorrectPosition_3: function() {
-        var element = $('<div></div>');
-        var content = $('<div></div>').css('position', 'absolute');
+        var element = $('<div></div>').css('position', 'relative').appendTo(document.body);
+        var content = $('<div></div>').css('position', 'absolute').appendTo(element);
 
         element.height(100);
         content.height(400);
-        content.appendTo(element);
         content.css('top', '-300px');
 
-        element.appendTo(document.body);
         element.scrolla({content: content});
 
         var scroll = element.scrolla('scroll');
@@ -101,13 +87,32 @@ TestCase("behavior", {
         assertEquals('75%', scroll.css('top'));
     },
 
-    testScrollIsHiddenIfContentHasTheSameSizeAsViewport: function() {
-        var element = $('<div></div>');
+    testScrollHasCorrectPosition_4: function() {
+        var element = $('<div></div>').css('position', 'relative');
+        var binder = $('<div></div>').css('position', 'absolute');
         var content = $('<div></div>').css('position', 'absolute');
+
+        binder.append(content);
+        element.append(binder);
+
+        element.height(100);
+        content.height(200);
+        binder.height(300);
+
+        element.appendTo(document.body);
+        element.scrolla({content: content});
+
+        var scroll = element.scrolla('scroll');
+
+        assertEquals('0%', scroll.css('top'));
+    },
+
+    testScrollIsHiddenIfContentHasTheSameSizeAsViewport: function() {
+        var element = $('<div></div>').css('position', 'relative').appendTo(document.body);
+        var content = $('<div></div>').css('position', 'absolute').appendTo(element);
 
         element.height(100);
         content.height(100);
-        content.appendTo(element);
 
         element.scrolla({content: content});
 
@@ -117,8 +122,8 @@ TestCase("behavior", {
     },
 
     testContentPositionIsChangedWhenScrollIsDragged_1: function() {
-        var element = $('<div></div>').appendTo(document.body);
-        var content = $('<div></div>');
+        var element = $('<div></div>').css('position', 'relative').appendTo(document.body);
+        var content = $('<div></div>').css('position', 'absolute').appendTo(element);
 
         content.css({
             'position': 'absolute',
@@ -127,7 +132,6 @@ TestCase("behavior", {
 
         element.height(100);
         content.height(400);
-        content.appendTo(element);
 
         element.scrolla({content: content});
 
@@ -141,8 +145,8 @@ TestCase("behavior", {
     },
 
     testContentPositionIsChangedWhenScrollIsDragged_2: function() {
-        var element = $('<div></div>').appendTo(document.body);
-        var content = $('<div></div>').appendTo(element);;
+        var element = $('<div></div>').css('position', 'relative').appendTo(document.body);
+        var content = $('<div></div>').css('position', 'absolute').appendTo(element);
 
         content.css({
             'position': 'absolute',
@@ -164,8 +168,8 @@ TestCase("behavior", {
     },
 
     testScrollPositionIsChangedWhenContentIsDragged_1: function() {
-        var element = $('<div></div>').appendTo(document.body);
-        var content = $('<div></div>').appendTo(element);
+        var element = $('<div></div>').css('position', 'relative').appendTo(document.body);
+        var content = $('<div></div>').css('position', 'absolute').appendTo(element);
 
         content.css({
             'position': 'absolute',
@@ -191,8 +195,8 @@ TestCase("behavior", {
     },
 
     testScrollPositionIsChangedWhenContentIsDragged_2: function() {
-        var element = $('<div></div>').appendTo(document.body);
-        var content = $('<div></div>').appendTo(element);
+        var element = $('<div></div>').css('position', 'relative').appendTo(document.body);
+        var content = $('<div></div>').css('position', 'absolute').appendTo(element);
 
         content.css({
             'position': 'absolute',

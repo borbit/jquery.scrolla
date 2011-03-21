@@ -15,13 +15,8 @@ TestCase("methods", {
     },
 
     testUpdateMethodUpdatesScrollPositionIfContentPositionIsChanged: function() {
-        var content = $('<div></div>')
-            .css('position', 'absolute')
-            .css('top', 0);
-
-        var element = $('<div></div>')
-            .appendTo(document.body)
-            .append(content);
+        var element = $('<div></div>').css('position', 'relative').appendTo(document.body);
+        var content = $('<div></div>').css('position', 'absolute').appendTo(element);
 
         element.height(100);
         content.height(400);

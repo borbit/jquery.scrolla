@@ -23,16 +23,16 @@ function createScrolla(viewport, options) {
     if (content == false) {
         content = viewport.children().eq(0);
     }
-    
-    var scroll = $('<div></div>')
-        .css('position', 'absolute')
-        .addClass(options['class'])
-        .appendTo(viewport);
-    
+
+    var scroll = $('<div></div>');
+    scroll.addClass(options['class']);
+    scroll.appendTo(viewport);
+
     scroll.draggable({containment: 'parent', axis: 'y'});
+
     scroll.bind('dragstart', updateVars);
     content.bind('drag', updateScroll);
-    
+
     scroll.bind('drag', function(event, ui) {
         content.css('top', -Math.floor(ui.position.top / viewStep) * contStep);
     });
@@ -51,9 +51,10 @@ function createScrolla(viewport, options) {
 
     function updateScroll() {
         updateVars();
-        
+
         if (contHeight > viewHeight) {
-            scroll.css('top', Math.abs(content.position().top / contStep) + '%');
+            var offset = content.offset().top - viewport.offset().top;
+            scroll.css('top', Math.abs(offset / contStep) + '%');
             scroll.css('height', Math.floor(viewHeight / contStep) + '%');
             scroll.show();
         } else {

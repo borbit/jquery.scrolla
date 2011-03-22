@@ -54,7 +54,7 @@ TestCase("behavior", {
 
         var scroll = element.scrolla('scroll');
 
-        assertEquals('50%', scroll.css('top'));
+        assertEquals(50, scroll.position().top);
     },
 
     testScrollHasCorrectPosition_2: function() {
@@ -69,7 +69,7 @@ TestCase("behavior", {
 
         var scroll = element.scrolla('scroll');
 
-        assertEquals('25%', scroll.css('top'));
+        assertEquals(25, scroll.position().top);
     },
 
     testScrollHasCorrectPosition_3: function() {
@@ -84,7 +84,7 @@ TestCase("behavior", {
 
         var scroll = element.scrolla('scroll');
 
-        assertEquals('75%', scroll.css('top'));
+        assertEquals(75, scroll.position().top);
     },
 
     testScrollHasCorrectPosition_4: function() {
@@ -104,7 +104,7 @@ TestCase("behavior", {
 
         var scroll = element.scrolla('scroll');
 
-        assertEquals('0%', scroll.css('top'));
+        assertEquals(0, scroll.position().top);
     },
 
     testScrollIsHiddenIfContentHasTheSameSizeAsViewport: function() {
@@ -184,7 +184,7 @@ TestCase("behavior", {
         scroll.trigger('drag', {position: {top: 75}});
         scroll.trigger('dragstop', {position: {top: 75}});
 
-        assertEquals(-100, content.position().top);
+        assertEquals(0, content.position().top);
     },
 
     testScrollPositionIsChangedWhenContentIsDragged_1: function() {
@@ -211,7 +211,7 @@ TestCase("behavior", {
 
         var scroll = element.scrolla('scroll');
         
-        assertEquals('50%', scroll.css('top'));
+        assertEquals(50, scroll.position().top);
     },
 
     testScrollPositionIsChangedWhenContentIsDragged_2: function() {
@@ -238,6 +238,6 @@ TestCase("behavior", {
 
         var scroll = element.scrolla('scroll');
 
-        assertEquals('75%', scroll.css('top'));
+        assertEquals(75, scroll.position().top);
     }
 });

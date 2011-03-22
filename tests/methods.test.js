@@ -24,12 +24,12 @@ TestCase("methods", {
 
         var scroll = element.scrolla('scroll');
 
-        assertEquals('0%', scroll.css('top'));
+        assertEquals(0, scroll.position().top);
 
         content.css('top', '-200px');
         element.scrolla('update');
 
-        assertEquals('50%', scroll.css('top'));
+        assertEquals(50, scroll.position().top);
     },
 
     testUpdateMethodUpdatesScrollHeightContentHeightIsChanged: function() {

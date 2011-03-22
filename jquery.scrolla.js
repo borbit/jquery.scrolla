@@ -18,44 +18,50 @@ $.widget('ui.scrolla', {
 });
 
 function createScrolla(viewport, options) {
-    var content = options.content;
+    var viewHeight, contHeight,
+        viewOffset, contOffset,
+        viewStep, contStep, scroll;
+
+    var abs = Math.abs,
+        floor = Math.floor,
+        content = options.content;
 
     if (content == false) {
         content = viewport.children().eq(0);
     }
 
-    var scroll = $('<div></div>');
+    scroll = $('<div></div>');
     scroll.addClass(options['class']);
     scroll.appendTo(viewport);
 
     scroll.draggable({containment: 'parent', axis: 'y'});
 
-    scroll.bind('dragstart', updateVars);
     content.bind('drag', updateScroll);
-
+    scroll.bind('dragstart', updateVars);
     scroll.bind('drag', function(event, ui) {
-        content.css('top', viewOffset - Math.floor(ui.position.top / viewStep) * contStep);
+        moveConent(ui.position.top);
     });
 
-    var viewHeight, contHeight,
-        viewOffset, contOffset,
-        viewStep, contStep;
+    function moveConent(scrollTop) {
+        content.offset({top: floor(viewOffset - scrollTop / viewStep * contStep)});
+    }
 
     function updateVars() {
         viewHeight = viewport.height();
-        contHeight = content.height();
         viewOffset = viewport.offset().top;
+        viewStep = viewHeight / 100;
+
+        contHeight = content.height();
         contOffset = content.offset().top;
-        viewStep = Math.floor(viewHeight / 100);
-        contStep = Math.floor(contHeight / 100);
+        contStep = contHeight / 100;
     }
 
     function updateScroll() {
         updateVars();
 
         if (contHeight > viewHeight) {
-            scroll.css('top', Math.abs((contOffset - viewOffset) / contStep) + '%');
-            scroll.css('height', Math.floor(viewHeight / contStep) + '%');
+            scroll.css('top', abs((contOffset - viewOffset) / contStep) + '%');
+            scroll.css('height', floor(viewHeight / contStep) + '%');
             scroll.show();
         } else {
             scroll.hide();

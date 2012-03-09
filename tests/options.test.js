@@ -1,16 +1,16 @@
-TestCase("options", {
-    testDefaultOptions: function() {
-        var element = $('<div><div></div></div>').scrolla();
-        
-        assertFalse(element.scrolla('option', 'content'));
-        assertEquals('scrolla', element.scrolla('option', 'class'));
-    },
+module('options');
 
-    testClassOption: function() {
-        var myClass = 'myClass';
-        var element = $('<div><div></div></div>').scrolla({'class': myClass});
-        var scroll = element.scrolla('scroll');
+test('default options', function() {
+    var element = $('<div><div></div></div>').scrolla();
+    
+    equal(element.scrolla('option', 'content'), false);
+    equal(element.scrolla('option', 'class'), 'scrolla');
+})
 
-        assertTrue(scroll.hasClass(myClass));
-    }
+test('"class" option', function() {
+    var myClass = 'myClass';
+    var element = $('<div><div></div></div>').scrolla({'class': myClass});
+    var scroll = element.scrolla('scroll');
+
+    ok(scroll.hasClass(myClass));
 });

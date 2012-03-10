@@ -1,3 +1,14 @@
+/*    
+    jQuery.Scrolla 0.1.0
+    
+    Simple and lightweight plugin to make scrollbars 
+    for a draggable content. For more info visit:
+    https://github.com/borbit/jquery.scrolla/
+    
+    Copyright (c) 2012 Serge Borbit <serge.borbit@gmail.com>
+    
+    Licensed under the MIT license
+*/
 (function($) {
 
 $.widget('ui.scrolla', {

@@ -2,15 +2,19 @@
 
 $.widget('ui.scrolla', {
     options: {
-        content: false,
-        'class': 'scrolla'
+        content: false
+      , 'class-y': 'scrolla-y'
+      , 'class-x': 'scrolla-x'
     },
     _create: function() {
         this.scrolla = createScrolla(this.element, this.options);
         this.scrolla.update()
     },
-    scroll: function() {
-        return this.scrolla.element;
+    'scroll-x': function() {
+        return this.scrolla.scrollX;
+    },
+    'scroll-y': function() {
+        return this.scrolla.scrollY;
     },
     update: function() {
         this.scrolla.update();
@@ -18,59 +22,69 @@ $.widget('ui.scrolla', {
 });
 
 function createScrolla(viewport, options) {
-    var viewHeight, contHeight,
-        viewOffset, contOffset,
-        viewStep, contStep, scroll;
-
-    var abs = Math.abs,
-        floor = Math.floor,
-        content = options.content;
-
-    if (content == false) {
-        content = viewport.children().eq(0);
-    }
-
-    scroll = $('<div></div>');
-    scroll.addClass(options['class']);
-    scroll.appendTo(viewport);
-
-    scroll.draggable({containment: 'parent', axis: 'y'});
-
-    content.bind('drag', updateScroll);
-    scroll.bind('dragstart', updateVars);
-    scroll.bind('drag', function(event, ui) {
-        moveConent(ui.position.top);
+    var content = options.content || viewport.children().eq(0);
+    var viewWidth, viewHeight, viewOffset, viewStepY, viewStepX,
+        contWidth, contHeight, contOffset, contStepY, contStepX;
+    
+    var scrollX = $('<div/>').addClass(options['class-x']).appendTo(viewport);
+    var scrollY = $('<div/>').addClass(options['class-y']).appendTo(viewport);
+    
+    scrollX.draggable({containment: 'parent', axis: 'x'});
+    scrollY.draggable({containment: 'parent', axis: 'y'});
+    
+    content.bind('drag', function() {
+        contOffset = content.offset();
+        updateScrolls();
+    });
+    
+    scrollY.bind('drag', function(event, ui) {
+        content.offset({top: Math.floor(viewOffset.top - ui.position.top / viewStepY * contStepY)});
+    });
+    
+    scrollX.bind('drag', function(event, ui) {
+        content.offset({left: Math.floor(viewOffset.left - ui.position.left / viewStepX * contStepX)});
     });
 
-    function moveConent(scrollTop) {
-        content.offset({top: floor(viewOffset - scrollTop / viewStep * contStep)});
-    }
-
-    function updateVars() {
+    function init() {
+        viewOffset = viewport.offset();
         viewHeight = viewport.height();
-        viewOffset = viewport.offset().top;
-        viewStep = viewHeight / 100;
-
+        viewWidth = viewport.width();
+        viewStepY  = viewHeight / 100;
+        viewStepX  = viewWidth / 100;
+        
+        contOffset = content.offset();
         contHeight = content.height();
-        contOffset = content.offset().top;
-        contStep = contHeight / 100;
+        contWidth = content.width();
+        contStepY  = contHeight / 100;
+        contStepX  = contWidth / 100;
+        
+        updateScrolls();
     }
-
-    function updateScroll() {
-        updateVars();
-
+    
+    function updateScrolls() {
         if (contHeight > viewHeight) {
-            scroll.css('top', abs((contOffset - viewOffset) / contStep) + '%');
-            scroll.css('height', floor(viewHeight / contStep) + '%');
-            scroll.show();
+            scrollY.css({
+                top: Math.abs((contOffset.top - viewOffset.top) / contStepY) + '%'
+              , height: Math.floor(viewHeight / contStepY) + '%'
+            }).show();
         } else {
-            scroll.hide();
+            scrollY.hide();
+        }
+        
+        if (contWidth > viewWidth) {
+            scrollX.css({
+                left: Math.abs((contOffset.left - viewOffset.left) / contStepX) + '%'
+              , width: Math.floor(viewWidth / contStepX) + '%'
+            }).show();
+        } else {
+            scrollX.hide();
         }
     }
-
+    
     return {
-        element: scroll,
-        update: updateScroll
+        update: init
+      , scrollX: scrollX
+      , scrollY: scrollY
     };
 }
 

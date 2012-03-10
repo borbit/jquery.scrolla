@@ -4,13 +4,22 @@ test('default options', function() {
     var element = $('<div><div></div></div>').scrolla();
     
     equal(element.scrolla('option', 'content'), false);
-    equal(element.scrolla('option', 'class'), 'scrolla');
+    equal(element.scrolla('option', 'class-x'), 'scrolla-x');
+    equal(element.scrolla('option', 'class-y'), 'scrolla-y');
 })
 
 test('"class" option', function() {
-    var myClass = 'myClass';
-    var element = $('<div><div></div></div>').scrolla({'class': myClass});
-    var scroll = element.scrolla('scroll');
+    var myClassX = 'myClassX'
+      , myClassY = 'myClassY';
+    
+    var element = $('<div><div></div></div>').scrolla({
+        'class-y': myClassY
+      , 'class-x': myClassX
+    });
+    
+    var scrollY = element.scrolla('scroll-y');
+    var scrollX = element.scrolla('scroll-x');
 
-    ok(scroll.hasClass(myClass));
+    ok(scrollY.hasClass(myClassY));
+    ok(scrollX.hasClass(myClassX));
 });

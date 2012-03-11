@@ -4,14 +4,14 @@ Simple and lightweight plugin to make scrollbars for a draggable content.
 
 ## Tests
 
-All Tests are written in [QUnit](http://docs.jquery.com/QUnit). To run tests
+All tests are written in [QUnit](http://docs.jquery.com/QUnit). To run tests
 just open the `tests/index.html` in a browser.
 
 ## License 
 
 (The MIT License)
 
-Copyright (c) 2012 Serge Borbit &lt;serge.borbit@gmail.com&gt;
+Copyright (c) 2011-2012 Serge Borbit &lt;serge.borbit@gmail.com&gt;
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

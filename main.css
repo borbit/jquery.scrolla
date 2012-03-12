@@ -20,11 +20,11 @@ p {
 }
 
 a {
-    color:#333;
+    color:#008;
 }
 
 a:hover {
-    color:#555;
+    color:#44b;
 }
 
 #page {
@@ -36,7 +36,7 @@ a:hover {
     position:relative;
     overflow:hidden;
     height:150px;
-    background:#eee;
+    background:#fff;
 }
 
 .viewport ul,
@@ -57,8 +57,9 @@ a:hover {
 .scrolla-x,
 .scrolla-y {
     position:absolute;
-    background:#555;
+    background:#000;
     border-radius:2px;
+    opacity:0.7;
 }
 
 .scrolla-x {

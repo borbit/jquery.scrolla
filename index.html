@@ -50,7 +50,6 @@
     position:relative;
     overflow:hidden;
     height:150px;
-    background:#eee;
 }
 #viewport ul {
     position:absolute;
@@ -63,7 +62,7 @@
     position:absolute;
     right:0px;
     width:10px;
-    background:#555;
+    background:#000;
     border-radius:2px;
 }
 </pre>
@@ -126,8 +125,9 @@ $(function() {
 .scrolla-x,
 .scrolla-y {
     position:absolute;
-    background:#555;
+    background:#000;
     border-radius:2px;
+    opacity:0.7;
 }
 .scrolla-x {
     bottom:0px;
@@ -161,9 +161,12 @@ $(function() {
     <h2>Demo #3</h2>
 
     <p>
-        The image in this example is bigger than its viewport both
-        by height and width, so there are two scrollbars. The image
-        also can be scrolled only by dragging of scrollbars .
+        This example as almost the same as first, but there the list
+        can be scrolled by dragging the list itself or by scrolling.
+        This functionality is added by three additional plugins:
+        <a href="https://github.com/borbit/jquery.viewport">jquery.viewport</a>,
+        <a href="https://github.com/borbit/jquery.scraggable">jquery.scraggable</a> and
+        <a href="http://jqueryui.com/demos/draggable/">jquery.draggable</a>.
     </p>
 
     <section>
@@ -190,7 +193,6 @@ $(function() {
     position:relative;
     overflow:hidden;
     height:150px;
-    background:#eee;
 }
 #viewport ul {
     position:absolute;
@@ -203,7 +205,7 @@ $(function() {
     position:absolute;
     right:0px;
     width:10px;
-    background:#555;
+    background:#000;
     border-radius:2px;
 }
 </pre>
@@ -244,6 +246,14 @@ $(function() {
 });
 </pre>
 </section>
+
+    <p>
+        Links for more info about these additional plugins:<br/>
+        — <a href="https://github.com/borbit/jquery.viewport">https://github.com/borbit/jquery.viewport</a><br/>
+        — <a href="https://github.com/borbit/jquery.scraggable">https://github.com/borbit/jquery.scraggable</a><br/>
+        — <a href="http://jqueryui.com/demos/draggable/">http://jqueryui.com/demos/draggable/</a>.
+    </p>
+    
     <h2>Demo #4</h2>
 
     <p>
@@ -257,6 +267,60 @@ $(function() {
         <img src="https://s3.amazonaws.com/serge.borb.it/scrolla.png" />
     </div>
     </section>
+
+<section>
+<abbr>CSS</abbr>
+<pre class="prettyprint">
+#viewport {
+    position:relative;
+    overflow:hidden;
+    height:150px;
+}
+#viewport img {
+    position:absolute;
+}
+.scrolla-x,
+.scrolla-y {
+    position:absolute;
+    background:#000;
+    border-radius:2px;
+    opacity:0.7;
+}
+.scrolla-x {
+    bottom:0px;
+    height:10px;
+}
+.scrolla-y {
+    right:0px;
+    width:10px;
+}
+</pre>
+</section>
+
+<section>
+<abbr>HTML</abbr>
+<pre class="prettyprint">
+&lt;div id="viewport"&gt;
+    &lt;img src="/path/to/your/image.png"/&gt;
+&lt;/div&gt;
+</pre>
+</section>
+
+<section>
+<abbr>JS</abbr>
+<pre class="prettyprint">
+$(function() {
+    $('#viewport').viewport();
+    
+    var content = $('#viewport').viewport('content');
+    
+    content.draggable({containment: 'parent'});
+    content.scraggable({containment: 'parent'});
+    
+    $('#viewport').scrolla({content: content});
+});
+</pre>
+</section>
 
 </div>
 

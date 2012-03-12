@@ -17,7 +17,7 @@
         if you notice a bug. Any contribution is appreciated.
     </p>
     
-    <h2>Demo</h2>
+    <h2>Demo #1</h2>
     
     <p>
         Simple example with one vertical scrollbar for a simple 10 items list. Just drag
@@ -25,7 +25,7 @@
     </p>
     
     <section>
-    <div id="viewport">
+    <div id="viewport_1">
         <ul>
             <li>List item 1</li>
             <li>List item 2</li>
@@ -49,7 +49,9 @@
     overflow:hidden;
     height:150px;
     background:#eee;
-    border:5px solid #eee;
+}
+#viewport ul {
+    position:absolute;
 }
 #viewport li {
     padding-left:5px;
@@ -60,7 +62,7 @@
     right:0px;
     width:10px;
     background:#555;
-    border-radius:5px;
+    border-radius:2px;
 }
 </pre>
 </section>
@@ -93,6 +95,66 @@ $(function() {
 });
 </pre>
 </section>
+    
+    <h2>Demo #2</h2>
+    
+    <p>
+        The image in this example is bigger than its viewport both
+        by height and width, so there are two scrollbars. The image
+        also can be scrolled only by dragging of scrollbars .
+    </p>
+    
+    <section>
+    <div id="viewport_2">
+        <img src="https://s3.amazonaws.com/serge.borb.it/scrolla.png" />
+    </div>
+    </section>
+    
+<section>
+<abbr>CSS</abbr>
+<pre>
+#viewport {
+    position:relative;
+    overflow:hidden;
+    height:150px;
+}
+#viewport img {
+    position:absolute;
+}
+.scrolla-x,
+.scrolla-y {
+    position:absolute;
+    background:#555;
+    border-radius:2px;
+}
+.scrolla-x {
+    bottom:0px;
+    height:10px;
+}
+.scrolla-y {
+    right:0px;
+    width:10px;
+}
+</pre>
+</section>
+
+<section>
+<abbr>HTML</abbr>
+<pre>
+&lt;div id="viewport"&gt;
+    &lt;img src="/path/to/your/image.png"/&gt;
+&lt;/div&gt;
+</pre>
+</section>
+
+<section>
+<abbr>JS</abbr>
+<pre>
+$(function() {
+    $('#viewport').scrolla();
+});
+</pre>
+</section>
 
 </div>
 
@@ -102,7 +164,8 @@ $(function() {
 
 <script>
 $(function() {
-    $('#viewport').scrolla();
+    $('#viewport_1').scrolla();
+    $('#viewport_2').scrolla();
 });
 </script>
 

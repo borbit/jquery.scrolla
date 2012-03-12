@@ -32,25 +32,39 @@ a:hover {
     width:600px;
 }
 
-#viewport {
+#viewport_1,
+#viewport_2 {
     position:relative;
     overflow:hidden;
     height:150px;
-    border:5px solid #eee;
     background:#eee;
 }
 
-#viewport li {
+#viewport_1 ul,
+#viewport_2 img {
+    position:absolute;
+}
+
+#viewport_1 li {
     padding-left:5px;
     line-height:30px;
 }
 
+.scrolla-x,
 .scrolla-y {
     position:absolute;
+    background:#555;
+    border-radius:2px;
+}
+
+.scrolla-x {
+    bottom:0px;
+    height:10px;
+}
+
+.scrolla-y {
     right:0px;
     width:10px;
-    background:#555;
-    border-radius:5px;
 }
 
 section {

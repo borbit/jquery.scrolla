@@ -2,6 +2,10 @@
 
 Simple and lightweight plugin to make scrollbars for a draggable content.
 
+[See the Live Demo here](http://borbit.github.com/jquery.scrolla/)
+
+## Documentation
+
 ## Tests
 
 All tests are written in [QUnit](http://docs.jquery.com/QUnit). To run tests

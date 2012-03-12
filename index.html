@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>jQuery.Scrolla</title>
+    <link rel="stylesheet" type="text/css" href="reset.css" />
+    <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+<body>
+<div id="page">
+    <h1>jQuery.Scrolla</h1>
+    
+    <p>
+        Simple and lightweight jQuery plugin to make scrollbars for a draggable content.
+        The plugin is hosted on <a href="https://github.com/borbit/jquery.scrolla">GitHub</a>.
+        Drop me a line to the <a href="https://github.com/borbit/jquery.scrolla/issues">issues page</a>
+        if you notice a bug. Any contribution is appreciated.
+    </p>
+    
+    <h2>Demo</h2>
+    
+    <p>
+        Simple example with one vertical scrollbar for a simple 10 items list. Just drag
+        the scrollbar and the list will be scrolled.
+    </p>
+    
+    <section>
+    <div id="viewport">
+        <ul>
+            <li>List item 1</li>
+            <li>List item 2</li>
+            <li>List item 3</li>
+            <li>List item 4</li>
+            <li>List item 5</li>
+            <li>List item 6</li>
+            <li>List item 7</li>
+            <li>List item 8</li>
+            <li>List item 9</li>
+            <li>List item 10</li>
+        </ul>
+    </div>
+    </section>
+
+<section>
+<abbr>CSS</abbr>
+<pre>
+#viewport {
+    position:relative;
+    overflow:hidden;
+    height:150px;
+    background:#eee;
+    border:5px solid #eee;
+}
+#viewport li {
+    padding-left:5px;
+    line-height:30px;
+}
+.scrolla-y {
+    position:absolute;
+    right:0px;
+    width:10px;
+    background:#555;
+    border-radius:5px;
+}
+</pre>
+</section>
+
+<section>
+<abbr>HTML</abbr>
+<pre>
+&lt;div id="viewport"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;List item 1&lt;/li&gt;
+        &lt;li&gt;List item 2&lt;/li&gt;
+        &lt;li&gt;List item 3&lt;/li&gt;
+        &lt;li&gt;List item 4&lt;/li&gt;
+        &lt;li&gt;List item 5&lt;/li&gt;
+        &lt;li&gt;List item 6&lt;/li&gt;
+        &lt;li&gt;List item 7&lt;/li&gt;
+        &lt;li&gt;List item 8&lt;/li&gt;
+        &lt;li&gt;List item 9&lt;/li&gt;
+        &lt;li&gt;List item 10&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+</pre>
+</section>
+
+<section>
+<abbr>JS</abbr>
+<pre>
+$(function() {
+    $('#viewport').scrolla();
+});
+</pre>
+</section>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
+<script src="https://github.com/borbit/jquery.scrolla/raw/master/jquery.scrolla.js"></script>
+
+<script>
+$(function() {
+    $('#viewport').scrolla();
+});
+</script>
+
+</body>
+</html>

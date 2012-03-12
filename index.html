@@ -5,6 +5,7 @@
     <title>jQuery.Scrolla</title>
     <link rel="stylesheet" type="text/css" href="reset.css" />
     <link rel="stylesheet" type="text/css" href="main.css" />
+    <link rel="stylesheet" type="text/css" href="prettify/prettify.css" />
 </head>
 <body>
 <div id="page">
@@ -20,12 +21,13 @@
     <h2>Demo #1</h2>
     
     <p>
-        Simple example with one vertical scrollbar for a simple 10 items list. Just drag
-        the scrollbar and the list will be scrolled.
+        Simple example with one vertical scrollbar for a simple 10 items list. The
+        list is bigger than its viewport only by height, so a horizontal scollbar
+        is absent. Just drag the scrollbar and the list will be scrolled.
     </p>
     
     <section>
-    <div id="viewport_1">
+    <div id="viewport_1" class="viewport">
         <ul>
             <li>List item 1</li>
             <li>List item 2</li>
@@ -43,7 +45,7 @@
 
 <section>
 <abbr>CSS</abbr>
-<pre>
+<pre class="prettyprint">
 #viewport {
     position:relative;
     overflow:hidden;
@@ -69,7 +71,7 @@
 
 <section>
 <abbr>HTML</abbr>
-<pre>
+<pre class="prettyprint" rel="HTML">
 &lt;div id="viewport"&gt;
     &lt;ul&gt;
         &lt;li&gt;List item 1&lt;/li&gt;
@@ -89,7 +91,7 @@
 
 <section>
 <abbr>JS</abbr>
-<pre>
+<pre class="prettyprint">
 $(function() {
     $('#viewport').scrolla();
 });
@@ -105,14 +107,14 @@ $(function() {
     </p>
     
     <section>
-    <div id="viewport_2">
+    <div id="viewport_2" class="viewport">
         <img src="https://s3.amazonaws.com/serge.borb.it/scrolla.png" />
     </div>
     </section>
     
 <section>
 <abbr>CSS</abbr>
-<pre>
+<pre class="prettyprint">
 #viewport {
     position:relative;
     overflow:hidden;
@@ -140,7 +142,7 @@ $(function() {
 
 <section>
 <abbr>HTML</abbr>
-<pre>
+<pre class="prettyprint">
 &lt;div id="viewport"&gt;
     &lt;img src="/path/to/your/image.png"/&gt;
 &lt;/div&gt;
@@ -149,23 +151,147 @@ $(function() {
 
 <section>
 <abbr>JS</abbr>
-<pre>
+<pre class="prettyprint">
 $(function() {
     $('#viewport').scrolla();
 });
 </pre>
 </section>
+    
+    <h2>Demo #3</h2>
+
+    <p>
+        The image in this example is bigger than its viewport both
+        by height and width, so there are two scrollbars. The image
+        also can be scrolled only by dragging of scrollbars .
+    </p>
+
+    <section>
+    <div id="viewport_3" class="viewport">
+        <ul>
+            <li>List item 1</li>
+            <li>List item 2</li>
+            <li>List item 3</li>
+            <li>List item 4</li>
+            <li>List item 5</li>
+            <li>List item 6</li>
+            <li>List item 7</li>
+            <li>List item 8</li>
+            <li>List item 9</li>
+            <li>List item 10</li>
+        </ul>
+    </div>
+    </section>
+
+<section>
+<abbr>CSS</abbr>
+<pre class="prettyprint">
+#viewport {
+    position:relative;
+    overflow:hidden;
+    height:150px;
+    background:#eee;
+}
+#viewport ul {
+    position:absolute;
+}
+#viewport li {
+    padding-left:5px;
+    line-height:30px;
+}
+.scrolla-y {
+    position:absolute;
+    right:0px;
+    width:10px;
+    background:#555;
+    border-radius:2px;
+}
+</pre>
+</section>
+
+<section>
+<abbr>HTML</abbr>
+<pre class="prettyprint">
+&lt;div id="viewport"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;List item 1&lt;/li&gt;
+        &lt;li&gt;List item 2&lt;/li&gt;
+        &lt;li&gt;List item 3&lt;/li&gt;
+        &lt;li&gt;List item 4&lt;/li&gt;
+        &lt;li&gt;List item 5&lt;/li&gt;
+        &lt;li&gt;List item 6&lt;/li&gt;
+        &lt;li&gt;List item 7&lt;/li&gt;
+        &lt;li&gt;List item 8&lt;/li&gt;
+        &lt;li&gt;List item 9&lt;/li&gt;
+        &lt;li&gt;List item 10&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+</pre>
+</section>
+
+<section>
+<abbr>JS</abbr>
+<pre class="prettyprint">
+$(function() {
+    $('#viewport').viewport({position: 'top'});
+    
+    var content = $('#viewport').viewport('content');
+    
+    content.draggable({containment: 'parent'});
+    content.scraggable({containment: 'parent'});
+    
+    $('#viewport').scrolla({content: content});
+});
+</pre>
+</section>
+    <h2>Demo #4</h2>
+
+    <p>
+        The image in this example is bigger than its viewport both
+        by height and width, so there are two scrollbars. The image
+        also can be scrolled only by dragging of scrollbars .
+    </p>
+
+    <section>
+    <div id="viewport_4" class="viewport">
+        <img src="https://s3.amazonaws.com/serge.borb.it/scrolla.png" />
+    </div>
+    </section>
 
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
+<script src="https://github.com/borbit/jquery.scraggable/raw/master/jquery.scraggable.js"></script>
+<script src="https://github.com/borbit/jquery.viewport/raw/master/jquery.viewport.js"></script>
 <script src="https://github.com/borbit/jquery.scrolla/raw/master/jquery.scrolla.js"></script>
+<script src="prettify/prettify.js"></script>
+<script src="prettify/lang-css.js"></script>
 
 <script>
 $(function() {
     $('#viewport_1').scrolla();
     $('#viewport_2').scrolla();
+    
+    $('#viewport_3').viewport({position: 'top'});
+    
+    var content = $('#viewport_3').viewport('content');
+    
+    content.draggable({containment: 'parent'});
+    content.scraggable({containment: 'parent'});
+    
+    $('#viewport_3').scrolla({content: content});
+    
+    $('#viewport_4').viewport();
+    
+    content = $('#viewport_4').viewport('content');
+    
+    content.draggable({containment: 'parent'});
+    content.scraggable({containment: 'parent'});
+    
+    $('#viewport_4').scrolla({content: content});
+    
+    prettyPrint();
 });
 </script>
 

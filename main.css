@@ -32,20 +32,24 @@ a:hover {
     width:600px;
 }
 
-#viewport_1,
-#viewport_2 {
+.viewport {
     position:relative;
     overflow:hidden;
     height:150px;
     background:#eee;
 }
 
-#viewport_1 ul,
-#viewport_2 img {
+.viewport ul,
+.viewport img {
     position:absolute;
 }
 
-#viewport_1 li {
+.viewport ul {
+    width:100%;
+}
+
+.viewport li {
+    display:block;
     padding-left:5px;
     line-height:30px;
 }

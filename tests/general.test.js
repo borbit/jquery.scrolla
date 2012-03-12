@@ -180,100 +180,107 @@ test('scroll-x is hidden if content has the same size as viewport', function() {
     equal(scroll.css('display'), 'none');
 });
 
-test('content position is changed after scroll-y is dragged #1', function() {
-    this.element.css({top: '0px', height: '100px'});
-    this.content.css({top: '0px', height: '400px'});
+test('content position is changed after scrolls are dragged #1', function() {
+    this.element.css({top: '0px', left: '0px', height: '100px', width: '100px'});
+    this.content.css({top: '0px', left: '0px', height: '400px', width: '400px'});
     this.element.scrolla();
 
-    var scroll = this.element.scrolla('scroll-y');
+    var scrollY = this.element.scrolla('scroll-y');
+    var scrollX = this.element.scrolla('scroll-x');
 
-    scroll.trigger('dragstart', {position: {top: 0}});
-    scroll.trigger('drag', {position: {top: 50}});
-    scroll.trigger('dragstop', {position: {top: 50}});
+    scrollY.trigger('dragstart', {position: {top: 0}});
+    scrollY.trigger('drag', {position: {top: 50}});
+    scrollY.trigger('dragstop', {position: {top: 50}});
+    
+    scrollX.trigger('dragstart', {position: {left: 0}});
+    scrollX.trigger('drag', {position: {left: 50}});
+    scrollX.trigger('dragstop', {position: {left: 50}});
 
     equal(this.content.position().top, -200);
-});
-
-test('content position is changed after scroll-y is dragged #2', function() {
-    this.element.css({top: '0px', height: '100px'});
-    this.content.css({top: '0px', height: '400px'});
-    this.element.scrolla();
-
-    var scroll = this.element.scrolla('scroll-y');
-
-    scroll.trigger('dragstart', {position: {top: 0}});
-    scroll.trigger('drag', {position: {top: 75}});
-    scroll.trigger('dragstop', {position: {top: 75}});
-
-    equal(this.content.position().top, -300);
-});
-
-test('content position is changed after scroll-y is dragged #3', function() {
-    var binder = $('<div/>').css({position: 'absolute', height: '700px', top: '-300px'})
-      , element = $('<div/>').css({position: 'relative', height: '100px', margin: '200px'})
-      , content = $('<div/>').css({position: 'absolute', height: '400px', top: '300px'});
-    
-    binder.append(content);
-    element.append(binder).appendTo(document.body);
-    element.scrolla({content: content});
-
-    var scroll = element.scrolla('scroll-y');
-        
-    scroll.trigger('dragstart', {position: {top: 0}});
-    scroll.trigger('drag', {position: {top: 75}});
-    scroll.trigger('dragstop', {position: {top: 75}});
-
-    equal(content.position().top, 0);
-    
-    element.remove();
-});
-
-test('content position is changed after scroll-x is dragged #1', function() {
-    this.element.css({left: '0px', width: '100px'});
-    this.content.css({left: '0px', width: '400px'});
-    this.element.scrolla();
-
-    var scroll = this.element.scrolla('scroll-x');
-
-    scroll.trigger('dragstart', {position: {left: 0}});
-    scroll.trigger('drag', {position: {left: 50}});
-    scroll.trigger('dragstop', {position: {left: 50}});
-
     equal(this.content.position().left, -200);
 });
 
-test('content position is changed after scroll-x is dragged #2', function() {
-    this.element.css({left: '0px', width: '100px'});
-    this.content.css({left: '0px', width: '400px'});
+test('content position is changed after scrolls are dragged #2', function() {
+    this.element.css({top: '0px', left: '0px', height: '100px', width: '100px'});
+    this.content.css({top: '0px', left: '0px', height: '400px', width: '400px'});
     this.element.scrolla();
 
-    var scroll = this.element.scrolla('scroll-x');
+    var scrollY = this.element.scrolla('scroll-y');
+    var scrollX = this.element.scrolla('scroll-x');
 
-    scroll.trigger('dragstart', {position: {left: 0}});
-    scroll.trigger('drag', {position: {left: 75}});
-    scroll.trigger('dragstop', {position: {left: 75}});
+    scrollY.trigger('dragstart', {position: {top: 0}});
+    scrollY.trigger('drag', {position: {top: 75}});
+    scrollY.trigger('dragstop', {position: {top: 75}});
+    
+    scrollX.trigger('dragstart', {position: {left: 0}});
+    scrollX.trigger('drag', {position: {left: 75}});
+    scrollX.trigger('dragstop', {position: {left: 75}});
 
+    equal(this.content.position().top, -300);
     equal(this.content.position().left, -300);
 });
 
-test('content position is changed after scroll-x is dragged #3', function() {
-    var binder = $('<div/>').css({position: 'absolute', width: '700px', left: '-300px'})
-      , element = $('<div/>').css({position: 'relative', width: '100px', margin: '200px'})
-      , content = $('<div/>').css({position: 'absolute', width: '400px', left: '300px'});
+test('content position is changed after scrolls are dragged #3', function() {
+    var binder = $('<div/>').css({
+        position: 'absolute'
+      , height: '700px'
+      , width: '700px'
+      , left: '-300px'
+      , top: '-300px'
+    });
+    var element = $('<div/>').css({
+        position: 'relative'
+      , margin: '200px'
+      , height: '100px'
+      , width: '100px'
+    });
+    var content = $('<div/>').css({
+        position: 'absolute'
+      , height: '400px'
+      , width: '400px'
+      , left: '300px'
+      , top: '300px'
+    });
     
     binder.append(content);
     element.append(binder).appendTo(document.body);
     element.scrolla({content: content});
 
-    var scroll = element.scrolla('scroll-x');
+    var scrollY = element.scrolla('scroll-y');
+    var scrollX = element.scrolla('scroll-x');
         
-    scroll.trigger('dragstart', {position: {left: 0}});
-    scroll.trigger('drag', {position: {left: 75}});
-    scroll.trigger('dragstop', {position: {left: 75}});
+    scrollY.trigger('dragstart', {position: {top: 0}});
+    scrollY.trigger('drag', {position: {top: 75}});
+    scrollY.trigger('dragstop', {position: {top: 75}});
+    
+    scrollX.trigger('dragstart', {position: {left: 0}});
+    scrollX.trigger('drag', {position: {left: 75}});
+    scrollX.trigger('dragstop', {position: {left: 75}});
 
+    equal(content.position().top, 0);
     equal(content.position().left, 0);
     
     element.remove();
+});
+
+test('content position is changed after scrolls is dragged #4', function() {
+    this.element.css({top: '0px', left: '0px', height: '100px', width: '100px', border: '10px solid #000'});
+    this.content.css({top: '0px', left: '0px', height: '400px', width: '400px'});
+    this.element.scrolla();
+
+    var scrollY = this.element.scrolla('scroll-y');
+    var scrollX = this.element.scrolla('scroll-x');
+
+    scrollY.trigger('dragstart', {position: {top: 0}});
+    scrollY.trigger('drag', {position: {top: 75}});
+    scrollY.trigger('dragstop', {position: {top: 75}});
+    
+    scrollX.trigger('dragstart', {position: {left: 0}});
+    scrollX.trigger('drag', {position: {left: 75}});
+    scrollX.trigger('dragstop', {position: {left: 75}});
+
+    equal(this.content.position().top, -300);
+    equal(this.content.position().left, -300);
 });
 
 test('scroll-y position is changed after content is dragged #1', function() {

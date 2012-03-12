@@ -49,15 +49,18 @@ function createScrolla(viewport, options) {
     });
     
     scrollY.bind('drag', function(event, ui) {
-        content.offset({top: Math.floor(viewOffset.top - ui.position.top / viewStepY * contStepY)});
+        content.offset({top: Math.floor(viewOffset.top-ui.position.top / viewStepY*contStepY)});
     });
     
     scrollX.bind('drag', function(event, ui) {
-        content.offset({left: Math.floor(viewOffset.left - ui.position.left / viewStepX * contStepX)});
+        content.offset({left: Math.floor(viewOffset.left-ui.position.left / viewStepX*contStepX)});
     });
 
     function init() {
         viewOffset = viewport.offset();
+        viewOffset.left += parseInt(viewport.css('border-left-width'), 10);
+        viewOffset.top += parseInt(viewport.css('border-top-width'), 10);
+        
         viewHeight = viewport.height();
         viewWidth = viewport.width();
         viewStepY  = viewHeight / 100;

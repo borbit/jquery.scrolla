@@ -16,6 +16,7 @@ $.widget('ui.scrolla', {
         content: false
       , 'class-y': 'scrolla-y'
       , 'class-x': 'scrolla-x'
+      , tpl: '<div/>'
     },
     _create: function() {
         this.scrolla = createScrolla(this.element, this.options);
@@ -33,12 +34,12 @@ $.widget('ui.scrolla', {
 });
 
 function createScrolla(viewport, options) {
-    var content = options.content || viewport.children().eq(0);
+    var content = options.content || viewport.children();
     var viewWidth, viewHeight, viewOffset, scrollYStep,
         contWidth, contHeight, contOffset, scrollXStep;
     
-    var scrollX = $('<div/>').addClass(options['class-x']).appendTo(viewport);
-    var scrollY = $('<div/>').addClass(options['class-y']).appendTo(viewport);
+    var scrollX = $(options.tpl).addClass(options['class-x']).appendTo(viewport);
+    var scrollY = $(options.tpl).addClass(options['class-y']).appendTo(viewport);
     
     scrollX.draggable({containment: 'parent', axis: 'x'});
     scrollY.draggable({containment: 'parent', axis: 'y'});

@@ -34,8 +34,8 @@ $.widget('ui.scrolla', {
 
 function createScrolla(viewport, options) {
     var content = options.content || viewport.children().eq(0);
-    var viewWidth, viewHeight, viewOffset, viewStepY, viewStepX,
-        contWidth, contHeight, contOffset, contStepY, contStepX;
+    var viewWidth, viewHeight, viewOffset, scrollYStep,
+        contWidth, contHeight, contOffset, scrollXStep;
     
     var scrollX = $('<div/>').addClass(options['class-x']).appendTo(viewport);
     var scrollY = $('<div/>').addClass(options['class-y']).appendTo(viewport);
@@ -45,15 +45,15 @@ function createScrolla(viewport, options) {
     
     content.bind('drag', function() {
         contOffset = content.offset();
-        updateScrolls();
+        updateScrollsPosition();
     });
     
     scrollY.bind('drag', function(event, ui) {
-        content.offset({top: Math.floor(viewOffset.top-ui.position.top / viewStepY*contStepY)});
+        content.offset({top: viewOffset.top - (ui.position.top*scrollYStep)});
     });
     
     scrollX.bind('drag', function(event, ui) {
-        content.offset({left: Math.floor(viewOffset.left-ui.position.left / viewStepX*contStepX)});
+        content.offset({left: viewOffset.left - (ui.position.left*scrollXStep)});
     });
 
     function init() {
@@ -63,36 +63,40 @@ function createScrolla(viewport, options) {
         
         viewHeight = viewport.height();
         viewWidth = viewport.width();
-        viewStepY  = viewHeight / 100;
-        viewStepX  = viewWidth / 100;
         
         contOffset = content.offset();
         contHeight = content.height();
         contWidth = content.width();
-        contStepY  = contHeight / 100;
-        contStepX  = contWidth / 100;
         
-        updateScrolls();
+        scrollYStep = (contHeight/100) / (viewHeight/100);
+        scrollXStep = (contWidth/100) / (viewWidth/100);
+        
+        updateScrollsVisibility();
+        updateScrollsPosition();
+        updateScrollsSize();
     }
     
-    function updateScrolls() {
+    function updateScrollsVisibility() {
         if (contHeight > viewHeight) {
-            scrollY.css({
-                top: Math.abs((contOffset.top - viewOffset.top) / contStepY) + '%'
-              , height: Math.floor(viewHeight / contStepY) + '%'
-            }).show();
+            scrollY.show();
         } else {
             scrollY.hide();
         }
-        
         if (contWidth > viewWidth) {
-            scrollX.css({
-                left: Math.abs((contOffset.left - viewOffset.left) / contStepX) + '%'
-              , width: Math.floor(viewWidth / contStepX) + '%'
-            }).show();
+            scrollX.show();
         } else {
             scrollX.hide();
         }
+    }
+    
+    function updateScrollsPosition() {
+        scrollY.css('top', Math.abs((contOffset.top - viewOffset.top) / scrollYStep));
+        scrollX.css('left', Math.abs((contOffset.left - viewOffset.left) / scrollXStep));
+    }
+    
+    function updateScrollsSize() {
+        scrollY.css('height', viewHeight / scrollYStep);
+        scrollX.css('width', viewWidth / scrollXStep);
     }
     
     return {

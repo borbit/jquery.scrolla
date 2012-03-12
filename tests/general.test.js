@@ -26,44 +26,28 @@ test('dom structure', function() {
     equal(this.element.children('.' + scrollXClass).length, 1);
 });
 
-test('scroll-y has correct height #1', function() {
-    this.element.height(100);
-    this.content.height(200);
+test('scrolls has correct height #1', function() {
+    this.element.height(200).width(200);
+    this.content.height(400).width(400);
     this.element.scrolla();
 
-    var scroll = this.element.scrolla('scroll-y').get(0);
+    var scrollY = this.element.scrolla('scroll-y');
+    var scrollX = this.element.scrolla('scroll-x');
 
-    equal(scroll.style.height, '50%');
+    equal(scrollY.get(0).style.height, '100px');
+    equal(scrollX.get(0).style.width, '100px');
 });
 
-test('scroll-y has correct height #2', function() {
-    this.element.height(100);
-    this.content.height(400);
+test('scrolls has correct height #2', function() {
+    this.element.height(100).width(100);
+    this.content.height(400).width(400);
     this.element.scrolla();
 
-    var scroll = this.element.scrolla('scroll-y').get(0);
+    var scrollY = this.element.scrolla('scroll-y');
+    var scrollX = this.element.scrolla('scroll-x');
 
-    equal(scroll.style.height, '25%');
-});
-
-test('scroll-x has correct height #1', function() {
-    this.element.width(100);
-    this.content.width(200);
-    this.element.scrolla();
-
-    var scroll = this.element.scrolla('scroll-x').get(0);
-
-    equal(scroll.style.width, '50%');
-});
-
-test('scroll-x has correct height #2', function() {
-    this.element.width(100);
-    this.content.width(400);
-    this.element.scrolla();
-
-    var scroll = this.element.scrolla('scroll-x').get(0);
-
-    equal(scroll.style.width, '25%');
+    equal(scrollY.get(0).style.height, '25px');
+    equal(scrollX.get(0).style.width, '25px');
 });
 
 test('scroll-y has correct position #1', function() {
@@ -73,7 +57,7 @@ test('scroll-y has correct position #1', function() {
 
     var scroll = this.element.scrolla('scroll-y').get(0);
 
-    equal(scroll.style.top, '50%');
+    equal(scroll.style.top, '50px');
 });
 
 test('scroll-y has correct position #2', function() {
@@ -83,7 +67,7 @@ test('scroll-y has correct position #2', function() {
 
     var scroll = this.element.scrolla('scroll-y').get(0);
 
-    equal(scroll.style.top, '25%');
+    equal(scroll.style.top, '25px');
 });
 
 test('scroll-y has correct position #3', function() {
@@ -93,7 +77,7 @@ test('scroll-y has correct position #3', function() {
 
     var scroll = this.element.scrolla('scroll-y').get(0);
 
-    equal(scroll.style.top, '75%');
+    equal(scroll.style.top, '75px');
 });
 
 test('scroll-y has correct position #4', function() {
@@ -108,7 +92,7 @@ test('scroll-y has correct position #4', function() {
 
     var scroll = element.scrolla('scroll-y').get(0);
 
-    equal(scroll.style.top, '0%');
+    equal(scroll.style.top, '0px');
     
     element.remove();
 });
@@ -120,7 +104,7 @@ test('scroll-x has correct position #1', function() {
 
     var scroll = this.element.scrolla('scroll-x').get(0);
 
-    equal(scroll.style.left, '50%');
+    equal(scroll.style.left, '50px');
 });
 
 test('scroll-x has correct position #2', function() {
@@ -130,7 +114,7 @@ test('scroll-x has correct position #2', function() {
 
     var scroll = this.element.scrolla('scroll-x').get(0);
 
-    equal(scroll.style.left, '25%');
+    equal(scroll.style.left, '25px');
 });
 
 test('scroll-x has correct position #3', function() {
@@ -140,7 +124,7 @@ test('scroll-x has correct position #3', function() {
 
     var scroll = this.element.scrolla('scroll-x').get(0);
 
-    equal(scroll.style.left, '75%');
+    equal(scroll.style.left, '75px');
 });
 
 test('scroll-x has correct position #4', function() {
@@ -155,7 +139,7 @@ test('scroll-x has correct position #4', function() {
 
     var scroll = element.scrolla('scroll-x').get(0);
 
-    equal(scroll.style.left, '0%');
+    equal(scroll.style.left, '0px');
     
     element.remove();
 });

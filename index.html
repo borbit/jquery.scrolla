@@ -18,6 +18,11 @@
         if you notice a bug. Any contribution is appreciated.
     </p>
     
+    <p>
+        — <a href="http://twitter.com/borbit">Ping me on Twitter for any comments</a><br/>
+        — <a href="https://github.com/borbit/jquer.scrolla">Fork the project on GitHub</a><br/>
+    </p>
+    
     <h2>Demo #1</h2>
     
     <p>
@@ -63,7 +68,9 @@
     right:0px;
     width:10px;
     background:#000;
-    border-radius:2px;
+    border-radius:3px;
+    box-sizing:border-box;
+    border:1px solid #fff;
 }
 </pre>
 </section>
@@ -126,8 +133,9 @@ $(function() {
 .scrolla-y {
     position:absolute;
     background:#000;
-    border-radius:2px;
-    opacity:0.7;
+    border-radius:3px;
+    box-sizing:border-box;
+    border:1px solid #fff;
 }
 .scrolla-x {
     bottom:0px;
@@ -206,7 +214,9 @@ $(function() {
     right:0px;
     width:10px;
     background:#000;
-    border-radius:2px;
+    border-radius:3px;
+    box-sizing:border-box;
+    border:1px solid #fff;
 }
 </pre>
 </section>
@@ -257,9 +267,8 @@ $(function() {
     <h2>Demo #4</h2>
 
     <p>
-        The image in this example is bigger than its viewport both
-        by height and width, so there are two scrollbars. The image
-        also can be scrolled only by dragging of scrollbars .
+        As the same behavior as in the previous example but for the image
+        from the second example.
     </p>
 
     <section>
@@ -283,8 +292,9 @@ $(function() {
 .scrolla-y {
     position:absolute;
     background:#000;
-    border-radius:2px;
-    opacity:0.7;
+    border-radius:3px;
+    box-sizing:border-box;
+    border:1px solid #fff;
 }
 .scrolla-x {
     bottom:0px;
@@ -321,7 +331,6 @@ $(function() {
 });
 </pre>
 </section>
-
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -337,23 +346,27 @@ $(function() {
     $('#viewport_1').scrolla();
     $('#viewport_2').scrolla();
     
-    $('#viewport_3').viewport({position: 'top'});
+    (function() {
+        $('#viewport_3').viewport({position: 'top'});
     
-    var content = $('#viewport_3').viewport('content');
+        var content = $('#viewport_3').viewport('content');
     
-    content.draggable({containment: 'parent'});
-    content.scraggable({containment: 'parent'});
+        content.draggable({containment: 'parent'});
+        content.scraggable({containment: 'parent'});
     
-    $('#viewport_3').scrolla({content: content});
+        $('#viewport_3').scrolla({content: content});
+    })();
     
-    $('#viewport_4').viewport();
+    (function() {
+        $('#viewport_4').viewport();
     
-    content = $('#viewport_4').viewport('content');
+        var content = $('#viewport_4').viewport('content');
     
-    content.draggable({containment: 'parent'});
-    content.scraggable({containment: 'parent'});
+        content.draggable({containment: 'parent'});
+        content.scraggable({containment: 'parent'});
     
-    $('#viewport_4').scrolla({content: content});
+        $('#viewport_4').scrolla({content: content});
+    })();
     
     prettyPrint();
 });

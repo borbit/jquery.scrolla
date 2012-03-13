@@ -57,9 +57,10 @@ a:hover {
 .scrolla-x,
 .scrolla-y {
     position:absolute;
-    background:#000;
-    border-radius:2px;
-    opacity:0.7;
+    background:#444;
+    border-radius:3px;
+    box-sizing:border-box;
+    border:1px solid #fff;
 }
 
 .scrolla-x {

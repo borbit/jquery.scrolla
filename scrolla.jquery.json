@@ -1,0 +1,30 @@
+{
+  "name": "scrolla",
+  "title": "jQuery Scrolla",
+  "description": "Simple and lightweight plugin to make scrollbars for a draggable content.",
+  "keywords": [
+    "ui",
+    "scroll",
+    "scrollbar"
+  ],
+  "version": "0.1.0",
+  "author": {
+    "name": "Serge Borbit",
+    "email": "serge.borbit@gmail.com",
+    "url": "https://github.com/borbit"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://en.wikipedia.org/wiki/MIT_License#License_terms"
+    }
+  ],
+  "dependencies": {
+    "jquery": ">=1.4.3"
+  },
+  "bugs": "https://github.com/borbit/jquery.scrolla/issues",
+  "homepage": "https://github.com/borbit/jquery.scrolla",
+  "download": "https://github.com/borbit/jquery.scrolla",
+  "demo": "http://borbit.github.com/jquery.scrolla/",
+  "docs": "http://borbit.github.com/jquery.scrolla/"
+}
